@@ -1,0 +1,131 @@
+
+
+<!-- Search Form -->
+<form class="header-form">
+    <div class="skip"><i class="fas fa-times"></i></div>
+    <div class="header-form-area">
+        <input type="text" placeholder="Search Here">
+        <button type="submit"><i class="flaticon-search-interface-symbol"></i></button>
+    </div>
+</form>
+
+<!-- banner-section start -->
+<section class="banner-section">
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="banner-content">
+                    <h2 class="title">Book Your Air Ticket Easy & Fast</h2>
+                    <p>
+                        Stop Searching. Start Traveling. The airline that’s different and better.<br>
+                        Register with Us to Enjoy Amazing Discounts on Bookings!
+                    </p>
+                    <div class="btn-area">
+                        <a href="/about" class="cmn-btn">About Us</a>
+                        <a href="/contact" class="cmn-btn-active">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner-section end -->
+
+<a href="#" class="scrollToTop"><i class="fas fa-angle-up"></i></a>
+
+<!-- search-widget-area start -->
+<form id="form" action="customer/ViewFlights">
+    <div class="search-widget-area pt-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="search-widget">
+                        <!-- Dropdowns -->
+                        <div class="rt-input-group rt-input-group--style">
+                            <% const renderDropdown = (name, placeholder, airports) => { %>
+                                <div class="single-input col-rt-in-3">
+                                    <select name="<%= name %>" class="select-bar">
+                                        <option value="" selected><%= placeholder %></option>
+                                        <% if (airports && airports.length) { %>
+                                            <% airports.forEach(airport => { %>
+                                                <option value="<%= airport.airport_code %>"><%= airport.name %></option>
+                                            <% }); %>
+                                        <% } %>
+                                    </select>
+                                    <span class="input-iconbadge">
+                                        <img src="/assets/images/icon-1.png" alt="" draggable="false">
+                                    </span>
+                                </div>
+                            <% } %>
+                            <%= renderDropdown('from', '--Select FROM Airport--', airports) %>
+                            <%= renderDropdown('to', '--Select TO Airport--', airports) %>
+                        </div>
+
+                        <!-- Date & Search -->
+                        <div class="rt-input-group rt-input-group--style">
+                            <div class="single-input col-rt-in-4">
+                                <input type="text" id="booking_date_from" name="booking_date_from" class="datepicker-here" data-language="en" placeholder="Departure Date">
+                                <span class="input-iconbadge">
+                                    <img src="/assets/images/icon-2.png" alt="" draggable="false">
+                                </span>
+                            </div>
+                            <div class="single-input col-rt-in-3">
+                                <button type="submit" class="cmn-btn">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- search-widget-area end -->
+
+<!-- service-section start -->
+<section class="service-section pt-120">
+    <div class="container">
+        <div class="row justify-content-center mb-30-none">
+            <%- [
+                { icon: "flaticon-startup", title: "Fast & Easy Booking", text: "Search for a flight, pick the seats as you wish, complete the payment. It's that easy!" },
+                { icon: "flaticon-internet", title: "Any Time Anywhere", text: "Taking you to destinations all around the globe every day. We’re Going Places!" },
+                { icon: "flaticon-audio-headset-of-auriculars-with-microphone-included", title: "24/7 Support", text: "24/7 online support for your questions and concerns. More than just flying!" }
+            ].forEach(service => { %>
+                <div class="col-lg-4 col-md-6 col-sm-8 mb-30">
+                    <div class="service-item d-flex flex-wrap">
+                        <div class="service-icon">
+                            <i class="<%= service.icon %>"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="title"><%= service.title %></h3>
+                            <p><%= service.text %></p>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+<!-- service-section end -->
+
+<!-- about-section start -->
+<section class="about-section pt-120 pb-120">
+    <div class="container-fluid">
+        <div class="row mb-30-none">
+            <div class="col-lg-6 mb-30">
+                <div class="about-thumb">
+                    <img src="https://d1.awsstatic.com/industry-images-customer-references/Customer-Reference-industry-Airline-2.6e50b6dd96da57191d1ba60c6f76400f61c0ad4c.png" alt="image">
+                </div>
+            </div>
+            <div class="col-lg-6 mb-30">
+                <div class="about-content">
+                    <h2 class="title">We Are B Airways</h2>
+                    <p>B Airways, a subsidiary of Virgin Airlines, is among the fastest-growing airlines globally. Established in 2017, it now serves 10+ destinations and over 50,000 passengers annually.</p>
+                    <a href="/about" class="cmn-btn">Discover More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about-section end -->
+
+<!-- Add other sections following the same pattern -->

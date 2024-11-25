@@ -1,0 +1,3 @@
+usecases 
+
+login/register - login with user email and password and also store contact details for future reference and login with google and store that email too

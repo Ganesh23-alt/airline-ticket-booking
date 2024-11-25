@@ -1,0 +1,119 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url('https://via.placeholder.com/1500x500?text=Flight+Hero+Image');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+}
+
+/* Search Form */
+#searchForm input, #searchForm button {
+    font-size: 1.1rem;
+    padding: 10px;
+}
+
+#searchForm input {
+    width: 200px;
+    margin-right: 10px;
+}
+
+#searchForm button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+}
+
+/* Flight Results */
+#flightsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.flight-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.flight-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.flight-card h5 {
+    font-size: 1.25rem;
+    margin-top: 10px;
+}
+
+.flight-card .price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ff6f61;
+}
+
+.flight-card .btn-book {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    margin-top: 15px;
+}
+
+.flight-card .btn-book:hover {
+    background-color: #218838;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    border-radius: 8px 8px 0 0;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card .card-body {
+    padding: 15px;
+}
+
+#flightsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.card .btn-primary {
+    background-color: #007bff;
+    border: none;
+    transition: 0.3s;
+}
+
+.card .btn-primary:hover {
+    background-color: #0056b3;
+}
+

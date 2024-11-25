@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Ganesh Ranabhat",
+    "email": "ganeshranabhat23@gmail.com",
+    "password": "$2a$10$6U/VHW/2ADC1eJOcfT8l1uPPg5bppRnDl0VzEzNLMN0f29tTfFJca"
+  },
+  {
+    "name": "Suson Sapkota",
+    "email": "suson123@gmail.com",
+    "password": "$2a$10$B1FTaxZO4RgJBlfBFCtqyu2x3NxTtyFDXc3PYdW7ZOC5CqPAYfRx."
+  },
+  {
+    "name": "Ganesh Ranabhat",
+    "email": "abc234@gmail.com",
+    "password": "$2a$10$.SposwCaTY4qDXa/TA3m6engVR/OvRz3KC91YvJPZgTU0EElpSV86"
+  },
+  {
+    "name": "Ganesh Rana",
+    "email": "ganeshrana@gmail.com",
+    "countryCode": "+1",
+    "phone": "6472854643",
+    "password": "$2a$10$yku3RcQ8Fcrk6jeGndpn0eXCxAcV6kMJ9qLZEsQ3NKIvthwh5fStm"
+  },
+  {
+    "name": "Ganesh Ranabhat",
+    "email": "abc2345@gmail.com",
+    "password": "$2a$10$KA5Ryt8tp9EzbHZrO67ilefTBas2K/jz31i2eDz4B83DsHflvjCQK",
+    "phone": "6472854643",
+    "countryCode": "1"
+  }
+]
