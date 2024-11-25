@@ -208,5 +208,21 @@
     "email": "newyg@mailinator.com",
     "seats": 2,
     "date": "2024-11-25T19:30:57.949Z"
+  },
+  {
+    "id": "1732565033311",
+    "flightId": "1",
+    "name": "Ganesh Ranabhat",
+    "email": "ganesh23@gmail.com",
+    "seats": 1,
+    "date": "2024-11-25T20:03:53.235Z"
+  },
+  {
+    "id": "1732565064829",
+    "flightId": "1",
+    "name": "Ganesh Ranabhat",
+    "email": "ganesh23@gmail.com",
+    "seats": 1,
+    "date": "2024-11-25T20:04:24.782Z"
   }
 ]

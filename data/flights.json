@@ -10,7 +10,7 @@
     "directFlight": true,
     "class": "Economy",
     "stops": "Direct",
-    "availableSeats": 67,
+    "availableSeats": 65,
     "image": "flight1.jpg"
   },
   {

@@ -34,5 +34,12 @@
     "password": "$2a$10$vVvMOoaZcL6Gf88Tot2zMOk9rI4chR5Dv42g.2uSDjVyAF/25N.j6",
     "phone": "6578908776",
     "countryCode": "+1"
+  },
+  {
+    "name": "Ganesh Ranabhat",
+    "email": "ganesh23@gmail.com",
+    "password": "$2a$10$NifXVm8/mEWYg8ADo9VCzuUfcjfJe0mieAIgPMT41AhdMTBuSOI2S",
+    "phone": "6472854644",
+    "countryCode": "Canada"
   }
 ]

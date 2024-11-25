@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if (bookingForm) {
         bookingForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            handleBookingFormSubmit();
+            handleBookingFormSubmit(token); // Pass token for authentication
         });
     } else {
         console.error("Booking form not found on the page.");
@@ -48,6 +48,7 @@ function decodeToken(token) {
 
 // Redirect to login page
 function redirectToLogin() {
+    alert("You must be logged in to book a flight.");
     window.location.href = '/login.html';
 }
 
@@ -81,7 +82,6 @@ function fetchFlightDetails(flightId) {
             handleErrorRedirect("Error loading flight details.");
         });
 }
-
 
 // Display flight details on the booking page
 function displayFlightDetails(flight) {
@@ -118,7 +118,7 @@ function handleErrorRedirect(message) {
 }
 
 // Handle booking form submission
-function handleBookingFormSubmit() {
+function handleBookingFormSubmit(token) {
     const flightId = document.getElementById("flightId")?.value;
     const name = document.getElementById("name")?.value.trim();
     const email = document.getElementById("email")?.value.trim();
@@ -144,15 +144,16 @@ function handleBookingFormSubmit() {
         date: new Date().toISOString(),
     };
 
-    submitBooking(booking);
+    submitBooking(booking, token);
 }
 
 // Submit booking to the server
-// function submitBooking(booking) {
+// function submitBooking(booking, token) {
 //     fetch('/api/confirmBooking', {
 //         method: 'POST',
 //         headers: {
 //             'Content-Type': 'application/json',
+//             'Authorization': `Bearer ${token}`, // Include token for authentication
 //         },
 //         body: JSON.stringify(booking),
 //     })
@@ -166,24 +167,36 @@ function handleBookingFormSubmit() {
 //         })
 //         .then((data) => {
 //             alert(data.message);
-//             window.location.href = `/receipt.html?bookingId=${data.booking.flightId}`;
+//             window.location.href = `/receipt.html?bookingId=${data.booking.id}`; // Redirect with booking ID
 //         })
 //         .catch((err) => {
 //             console.error("Error:", err);
 //             alert("Booking failed. Please try again.");
 //         });
 // }
+
 function submitBooking(booking) {
+    const token = localStorage.getItem('token'); // Retrieve token from localStorage
+
+    if (!token) {
+        alert("You must be logged in to book a flight.");
+        redirectToLogin();
+        return;
+    }
+
     fetch('/api/confirmBooking', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Add token for authentication
+        },
         body: JSON.stringify(booking),
     })
-        .then((response) => {
+        .then(async (response) => {
             if (!response.ok) {
-                return response.json().then((error) => {
-                    throw new Error(error.message || "Booking failed.");
-                });
+                // Try to extract error details if the response is not JSON
+                const errorText = await response.text();
+                throw new Error(errorText || "Booking failed.");
             }
             return response.json();
         })
@@ -193,7 +206,19 @@ function submitBooking(booking) {
         })
         .catch((err) => {
             console.error("Error:", err);
-            alert("Booking failed. Please try again.");
+
+            if (err.message.includes("Invalid or expired token")) {
+                alert("Your session has expired. Please log in again.");
+                redirectToLogin(); // Redirect to login on token failure
+            } else {
+                alert(`Booking failed: ${err.message}`);
+            }
         });
+}
+
+// Redirect to login page
+function redirectToLogin() {
+    alert("You must be logged in to book a flight")
+    window.location.href = '/login.html';
 }
 
