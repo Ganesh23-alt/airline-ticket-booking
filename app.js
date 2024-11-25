@@ -36,9 +36,11 @@ app.use("/api", bookingRoutes);
 // Serve static files from 'public' and 'views' folders
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "views")));
-app.get('/data/booking.json', (req, res) => {
-    res.sendFile(path.join(__dirname, 'data', 'booking.json'));
-});
+app.use('/data', express.static(path.join(__dirname, 'data')));
+
+// app.get('/data/booking.json', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'data', 'booking.json'));
+// });
 
 
 

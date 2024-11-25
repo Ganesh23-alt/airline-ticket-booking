@@ -1,98 +1,199 @@
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
-    
-    // Check if the user is not logged in
+
     if (!token) {
-        window.location.href = '/login.html'; // Redirect to login page
-        return; // Exit the function if not logged in
+        redirectToLogin();
+        return;
     }
 
     try {
-        // Decode the token and get user information
-        const user = JSON.parse(atob(token.split('.')[1]));
-        
-        // Display logged-in user's email
-        const userEmailElement = document.getElementById("userEmail");
-        if (userEmailElement) {
-            userEmailElement.innerText = `Logged in as: ${user.email}`;
-        }
+        const user = decodeToken(token);
+        displayUserEmail(user.email);
     } catch (err) {
         console.error("Invalid token:", err);
-        window.location.href = '/login.html'; // Redirect to login page if token is invalid
+        redirectToLogin();
         return;
     }
 
     const urlParams = new URLSearchParams(window.location.search);
     const flightId = urlParams.get('flightId');
-    
-    fetch('/data/flights.json')
-        .then(response => response.json())
-        .then(flights => {
-            const flight = flights.find(f => f.id == flightId);
-            if (flight) {
-                displayFlightDetails(flight);
-            }
-        })
-        .catch(err => console.error("Error loading flight data:", err));
 
-    // Display selected flight details
-    function displayFlightDetails(flight) {
-        const flightDetails = document.getElementById("flightDetails");
-        flightDetails.innerHTML = `
-            <div class="col-md-12">
-                <div class="card">
-                    <img src="/assets/images/${flight.image}" class="card-img-top" alt="Flight Image">
-                    <div class="card-body">
-                        <h5 class="card-title">${flight.name}</h5>
-                        <p><strong>Airline:</strong> ${flight.airline}</p>
-                        <p><strong>Destination:</strong> ${flight.destination}</p>
-                        <p><strong>Departure:</strong> ${new Date(flight.departureDate).toLocaleString()}</p>
-                        <p><strong>Arrival:</strong> ${new Date(flight.arrivalDate).toLocaleString()}</p>
-                        <p><strong>Price:</strong> $${flight.price}</p>
-                        <p><strong>Class:</strong> ${flight.class}</p>
-                        <p><strong>No of Stops:</strong> ${flight.stops}</p>
-                    </div>
-                </div>
-            </div>
-        `;
-        document.getElementById("flightId").value = flight.id;
+    if (flightId) {
+        fetchFlightDetails(flightId);
+    } else {
+        console.error("Flight ID is missing from the URL.");
+        handleErrorRedirect("Invalid flight ID.");
     }
 
-    // Handle form submission
-    document.getElementById("bookingFormFields").addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const flightId = document.getElementById("flightId").value;
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const seats = document.getElementById("seats").value;
-        const cardNumber = document.getElementById("cardNumber").value;
-        const expiryDate = document.getElementById("expiryDate").value;
-        const cvv = document.getElementById("cvv").value;
-
-        const booking = {
-            flightId,
-            name,
-            email,
-            seats,
-            cardNumber,
-            expiryDate,
-            cvv,
-            date: new Date().toLocaleString()
-        };
-
-        // Save booking data (In real-world scenario, this would be saved to a server)
-        fetch('/api/confirmBooking', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(booking)
-        })
-        .then(response => response.json())
-        .then(() => {
-            window.location.href = '/receipt.html'; // Redirect to receipt page after booking
-        })
-        .catch(err => console.error("Error saving booking data:", err));
-    });
+    const bookingForm = document.getElementById("bookingForm");
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleBookingFormSubmit();
+        });
+    } else {
+        console.error("Booking form not found on the page.");
+    }
 });
+
+// Decode JWT token
+function decodeToken(token) {
+    try {
+        const payload = token.split('.')[1]; // Get the payload part of the token
+        return JSON.parse(atob(payload)); // Decode and parse the payload
+    } catch (error) {
+        throw new Error("Failed to decode token.");
+    }
+}
+
+// Redirect to login page
+function redirectToLogin() {
+    window.location.href = '/login.html';
+}
+
+// Display the logged-in user's email
+function displayUserEmail(email) {
+    const userEmailElement = document.getElementById("userEmail");
+    if (userEmailElement) {
+        userEmailElement.innerText = `Logged in as: ${email}`;
+    }
+}
+
+// Fetch flight details from the server
+function fetchFlightDetails(flightId) {
+    fetch('/data/flights.json')
+        .then((response) => {
+            if (!response.ok) throw new Error("Failed to fetch flight details.");
+            return response.json();
+        })
+        .then((flights) => {
+            console.log("All flights data:", flights); // Debugging log
+            const flight = flights.find((f) => f.id.toString() === flightId.toString()); // Ensure type match
+            console.log("Flight found:", flight); // Debugging log
+            if (flight) {
+                displayFlightDetails(flight);
+            } else {
+                handleErrorRedirect("Flight not found.");
+            }
+        })
+        .catch((err) => {
+            console.error("Error loading flight details:", err);
+            handleErrorRedirect("Error loading flight details.");
+        });
+}
+
+
+// Display flight details on the booking page
+function displayFlightDetails(flight) {
+    const flightDetails = document.getElementById("flightDetails");
+    if (!flightDetails) {
+        console.error("Flight details element not found.");
+        return;
+    }
+    flightDetails.innerHTML = `
+        <div class="col-md-12">
+            <div class="card">
+                <img src="/assets/images/${flight.image}" class="card-img-top" alt="${flight.name}">
+                <div class="card-body">
+                    <h5 class="card-title">${flight.name}</h5>
+                    <p><strong>Airline:</strong> ${flight.airline}</p>
+                    <p><strong>Destination:</strong> ${flight.destination}</p>
+                    <p><strong>Departure:</strong> ${new Date(flight.departureDate).toLocaleString()}</p>
+                    <p><strong>Arrival:</strong> ${new Date(flight.arrivalDate).toLocaleString()}</p>
+                    <p><strong>Price:</strong> $${flight.price}</p>
+                    <p><strong>Class:</strong> ${flight.class}</p>
+                    <p><strong>No of Stops:</strong> ${flight.stops}</p>
+                </div>
+            </div>
+        </div>
+    `;
+    document.getElementById("flightId").value = flight.id; // Populate hidden input for flight ID
+}
+
+// Handle error redirect
+function handleErrorRedirect(message) {
+    console.error(message);
+    alert(message);
+    window.location.href = '/flights.html';
+}
+
+// Handle booking form submission
+function handleBookingFormSubmit() {
+    const flightId = document.getElementById("flightId")?.value;
+    const name = document.getElementById("name")?.value.trim();
+    const email = document.getElementById("email")?.value.trim();
+    const seats = document.getElementById("seats")?.value.trim();
+    const cardNumber = document.getElementById("cardNumber")?.value.trim();
+    const expiryDate = document.getElementById("expiryDate")?.value.trim();
+    const cvv = document.getElementById("cvv")?.value.trim();
+
+    // Validate required fields
+    if (![flightId, name, email, seats, cardNumber, expiryDate, cvv].every(Boolean)) {
+        alert("Please fill in all required fields.");
+        return;
+    }
+
+    const booking = {
+        flightId,
+        name,
+        email,
+        seats,
+        cardNumber,
+        expiryDate,
+        cvv,
+        date: new Date().toISOString(),
+    };
+
+    submitBooking(booking);
+}
+
+// Submit booking to the server
+// function submitBooking(booking) {
+//     fetch('/api/confirmBooking', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(booking),
+//     })
+//         .then((response) => {
+//             if (!response.ok) {
+//                 return response.json().then((error) => {
+//                     throw new Error(error.message || "Booking failed.");
+//                 });
+//             }
+//             return response.json();
+//         })
+//         .then((data) => {
+//             alert(data.message);
+//             window.location.href = `/receipt.html?bookingId=${data.booking.flightId}`;
+//         })
+//         .catch((err) => {
+//             console.error("Error:", err);
+//             alert("Booking failed. Please try again.");
+//         });
+// }
+function submitBooking(booking) {
+    fetch('/api/confirmBooking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(booking),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                return response.json().then((error) => {
+                    throw new Error(error.message || "Booking failed.");
+                });
+            }
+            return response.json();
+        })
+        .then((data) => {
+            alert(data.message);
+            window.location.href = `/receipt.html?bookingId=${data.booking.id}`; // Redirect with booking ID
+        })
+        .catch((err) => {
+            console.error("Error:", err);
+            alert("Booking failed. Please try again.");
+        });
+}
+

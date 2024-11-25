@@ -3,7 +3,6 @@ document.getElementById("searchForm").addEventListener("submit", function (e) {
 
     const destination = document.getElementById("destination").value.toLowerCase();
     const date = document.getElementById("date").value;
-    const searchDate = new Date(date.split('/').reverse().join('-')).toISOString().split('T')[0]; // Convert to YYYY-MM-DD format
 
     console.log(destination);
     console.log(date);
@@ -13,12 +12,7 @@ document.getElementById("searchForm").addEventListener("submit", function (e) {
         .then(response => response.json())
         .then(flights => {
             const filteredFlights = flights.filter(flight => {
-                // console.log(flight.departure)
-                // console.log(flight.destination.toLowerCase())
-                // console.log(searchDate)
-                // const departureDate = new Date(flight.departure).toISOString().split('T')[0]; 
-                return flight.destination.toLowerCase().includes(destination) 
-                // && flight.departureDate == searchDate;z
+                return flight.destination.toLowerCase().includes(destination);
             });
             console.log(filteredFlights);
 
@@ -43,7 +37,7 @@ document.getElementById("searchForm").addEventListener("submit", function (e) {
                                         Arrival: ${flight.arrival}<br>
                                         Price: $${flight.price}
                                     </p>
-                                    <a href="/booking.html" class="btn btn-primary" id="bookFlightBtn">Book Now</a>
+                                    <a href="/booking.html?flightId=${flight.id}" class="btn btn-primary">Book Now</a>
                                 </div>
                             </div>
                         </div>

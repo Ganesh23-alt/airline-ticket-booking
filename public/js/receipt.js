@@ -1,19 +1,28 @@
 window.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem('token');
     if (!token) {
-        window.location.href = '/login.html'; // Redirect if not logged in
+        window.location.href = '/login.html';
     }
 
-    const user = JSON.parse(atob(token.split('.')[1])); // Decode token to get user data
+    const user = JSON.parse(atob(token.split('.')[1])); // Decode token
 
-    // Fetch booking data to display the receipt
+    const urlParams = new URLSearchParams(window.location.search);
+    const bookingId = urlParams.get('bookingId');
+
     fetch('/data/booking.json')
-        .then(response => response.json())
-        .then(bookings => {
-            const lastBooking = bookings[bookings.length - 1]; // Get the last booking made
-            displayReceipt(lastBooking); // Display the receipt on the page
+        .then((response) => response.json())
+        .then((bookings) => {
+            const booking = bookings.find((b) => b.id === bookingId); // Find booking by ID
+            if (booking) {
+                displayReceipt(booking);
+            } else {
+                console.error("Booking not found.");
+                document.getElementById("receiptDetails").innerHTML = `
+                    <p class="text-danger">Booking not found.</p>
+                `;
+            }
         })
-        .catch(err => console.error("Error loading booking data:", err));
+        .catch((err) => console.error("Error loading booking data:", err));
 
     function displayReceipt(booking) {
         const receiptDetails = document.getElementById("receiptDetails");
@@ -23,33 +32,28 @@ window.addEventListener('DOMContentLoaded', function () {
             <p><strong>Name:</strong> ${booking.name}</p>
             <p><strong>Email:</strong> ${booking.email}</p>
             <p><strong>Seats:</strong> ${booking.seats}</p>
-            <p><strong>Payment Details:</strong> Card ending in ${booking.cardNumber.slice(-4)}</p>
             <p><strong>Booking Date:</strong> ${booking.date}</p>
         `;
     }
 
-    // Event listener for the download receipt button
     document.getElementById("downloadReceiptBtn").addEventListener('click', function () {
         fetch('/data/booking.json')
             .then(response => response.json())
             .then(bookings => {
-                const lastBooking = bookings[bookings.length - 1]; // Get the last booking made
-                
-                // Generate the receipt PDF
-                const doc = new jsPDF();
-                doc.text("Booking Receipt", 20, 20);
-                doc.text("Flight ID: " + lastBooking.flightId, 20, 30);
-                doc.text("Name: " + lastBooking.name, 20, 40);
-                doc.text("Email: " + lastBooking.email, 20, 50);
-                doc.text("Seats: " + lastBooking.seats, 20, 60);
-                doc.text("Booking Date: " + lastBooking.date, 20, 70);
-                doc.text("Payment: Card ending in " + lastBooking.cardNumber.slice(-4), 20, 80);
-                
-                // Save the generated PDF
-                doc.save("booking_receipt.pdf");
-                
-                // Redirect to the dashboard after downloading the receipt
-                window.location.href = '/dashboard.html';
+                const booking = bookings.find(b => b.id === bookingId);
+                if (booking) {
+                    const doc = new jsPDF();
+                    doc.text("Booking Receipt", 20, 20);
+                    doc.text("Flight ID: " + booking.flightId, 20, 30);
+                    doc.text("Name: " + booking.name, 20, 40);
+                    doc.text("Email: " + booking.email, 20, 50);
+                    doc.text("Seats: " + booking.seats, 20, 60);
+                    doc.text("Booking Date: " + booking.date, 20, 70);
+                    doc.save("booking_receipt.pdf");
+                    window.location.href = '/dashboard.html';
+                } else {
+                    alert("Booking not found. Cannot download receipt.");
+                }
             })
             .catch(err => console.error("Error loading booking data:", err));
     });
