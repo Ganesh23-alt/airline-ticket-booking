@@ -10,7 +10,7 @@
     "directFlight": true,
     "class": "Economy",
     "stops": "Direct",
-    "availableSeats": 65,
+    "availableSeats": 63,
     "image": "flight1.jpg"
   },
   {
@@ -23,7 +23,7 @@
     "price": 800,
     "directFlight": false,
     "class": "Economy",
-    "availableSeats": 64,
+    "availableSeats": 59,
     "image": "flight1.jpg"
   },
   {
@@ -51,7 +51,7 @@
     "directFlight": true,
     "class": "First",
     "stops": "Direct",
-    "availableSeats": 73,
+    "availableSeats": 68,
     "image": "flight1.jpg"
   },
   {
@@ -107,7 +107,7 @@
     "directFlight": true,
     "class": "First",
     "stops": "2+ Stops",
-    "availableSeats": 75,
+    "availableSeats": 73,
     "image": "flight1.jpg"
   }
 ]

@@ -36,7 +36,7 @@ function updateNavbar() {
       </a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
         <li><a class="dropdown-item" href="/flights">Flight Listing</a></li>
-        <li><a class="dropdown-item" href="/bookings">Flight Booking</a></li>
+        <li><a class="dropdown-item" href="/bookings">Flight Bookings</a></li>
       </ul>
     </li>
   `;
@@ -52,8 +52,7 @@ function updateNavbar() {
         </a>
         <ul class="dropdown-menu" aria-labelledby="userDropdown">
           <li><a class="dropdown-item" href="/profile">My Profile</a></li>
-          <li><a class="dropdown-item" href="/bookings">Your Bookings</a></li>
-          <li><a class="dropdown-item" href="/wishlist">Wishlist</a></li>
+          <li><a class="dropdown-item" href="/cart">Cart</a></li>
           <li><a class="dropdown-item" href="#" onclick="logout()">Logout</a></li>
         </ul>
       </li>

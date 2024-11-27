@@ -33,7 +33,14 @@ window.addEventListener('DOMContentLoaded', function () {
             <p><strong>Email:</strong> ${booking.email}</p>
             <p><strong>Seats:</strong> ${booking.seats}</p>
             <p><strong>Booking Date:</strong> ${booking.date}</p>
+            <button id="checkoutBtn" class="btn btn-success">Proceed to Checkout</button> <!-- Proceed to Checkout Button -->
         `;
+        
+        // Add event listener for Proceed to Checkout
+        document.getElementById("checkoutBtn").addEventListener('click', function () {
+            // Redirect to payment page with bookingId in the URL
+            window.location.href = `/payment.html?bookingId=${booking.id}`;
+        });
     }
 
     document.getElementById("downloadReceiptBtn").addEventListener('click', function () {

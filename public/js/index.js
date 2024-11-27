@@ -13,11 +13,25 @@ window.addEventListener('DOMContentLoaded', function () {
 
     fetchFlights();
 
-    document.getElementById("airlineFilter").addEventListener("change", applyFilters);
-    document.getElementById("priceSort").addEventListener("change", applyFilters);
-    document.getElementById("dateSort").addEventListener("change", applyFilters);
-    document.getElementById("searchForm").addEventListener("submit", searchFlights);
+    // Add event listeners to the elements after DOM is ready
+    const airlineFilter = document.getElementById("airlineFilter");
+    const priceSort = document.getElementById("priceSort");
+    const dateSort = document.getElementById("dateSort");
+    const searchForm = document.getElementById("searchForm");
+    const redirectSearch = document.getElementById("redirectSearch");
+
+    if (airlineFilter) airlineFilter.addEventListener("change", applyFilters);
+    if (priceSort) priceSort.addEventListener("change", applyFilters);
+    if (dateSort) dateSort.addEventListener("change", applyFilters);
+    if (searchForm) searchForm.addEventListener("submit", searchFlights);
+    if (redirectSearch) redirectSearch.addEventListener("submit", redirectSearchPage);
 });
+
+function redirectSearchPage(event) {
+    event.preventDefault();  // Prevent the form from submitting and reloading the page
+    console.log("Redirecting to dashboard...");
+    window.location.href = '/dashboard'; // Change to the desired URL
+}
 
 function fetchFlights() {
     fetch('/data/flights.json')
@@ -45,6 +59,7 @@ function displayFlights(flights) {
     const carouselInner = document.getElementById("carouselInner");
     let index = 0;
 
+    // Loop through the flights and create carousel items
     for (let i = 0; i < flights.length; i += 3) {
         const carouselItem = document.createElement("div");
         carouselItem.className = `carousel-item ${index === 0 ? "active" : ""}`;
@@ -56,10 +71,10 @@ function displayFlights(flights) {
                     <div class="card-body text-center">
                         <h5 class="card-title">${flight.name}</h5>
                         <p class="card-text">Airline: ${flight.airline}</p>
-                        <p class="card-text text-primary">Destination: $${flight.destination}</p>
-                        <p class="card-text text-primary">Departure Date: $${flight.departure}</p>
+                        <p class="card-text text-primary">Destination: ${flight.destination}</p>
+                        <p class="card-text text-primary">Departure Date: ${flight.departure}</p>
                         <p class="card-text text-primary">Price: $${flight.price}</p>
-                        <p class="card-text text-primary">Seats Available: $${flight.availableSeats}</p>
+                        <p class="card-text text-primary">Seats Available: ${flight.availableSeats}</p>
                         <button onclick="selectFlight(${flight.id})" class="btn btn-primary">Book Now</button>
                     </div>
                 </div>
@@ -74,8 +89,6 @@ function displayFlights(flights) {
         index++;
     }
 }
-
-
 
 function applyFilters() {
     const airline = document.getElementById("airlineFilter").value;
@@ -149,7 +162,6 @@ function searchFlights(event) {
 
     console.log(`Searching flights from ${from} to ${to} on ${departureDate} with return date: ${returnDate}`);
 }
-
 
 function selectFlight(flightId) {
     const url = `/booking.html?flightId=${flightId}`;

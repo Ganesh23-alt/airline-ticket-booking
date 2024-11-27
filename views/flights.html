@@ -4,39 +4,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Flights</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Search Form */
+        .search-form-container {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin: 0 auto;
+            max-width: 750px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+        }
+
+        .btn-search {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+            padding: 10px 30px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-search:hover {
+            background-color: #218838;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Results Section */
+        .search-results-container {
+            margin-top: 40px;
+        }
+
+        .result-title {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            background-color: #ffffff;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .card-text {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin: 10px 0;
+        }
+
+        .btn-book {
+            background-color: #007bff;
+            color: white;
+            border-radius: 20px;
+            padding: 10px 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-book:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
     <div id="navbar-placeholder"></div>
     <div class="container my-5">
-        <h2 class="text-center mb-4">Search Flights</h2>
-        <!-- Search Form -->
-        <form id="searchForm">
-            <div class="form-group">
-                <label for="destination">Destination</label>
-                <input type="text" class="form-control" id="destination" placeholder="Enter destination" required>
-            </div>
-            <div class="form-group">
-                <label for="date">Date</label>
-                <input type="date" class="form-control" id="date" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Search</button>
-        </form>
+        <!-- Title -->
+        <h2 class="text-center mb-5">Search Flights</h2>
 
-        <!-- Results -->
-        <h3 class="text-center my-4">Search Results</h3>
-        <div id="searchResults" class="row"></div>
+        <!-- Search Form -->
+        <div class="search-form-container">
+            <form id="searchForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="destination" class="form-label">Destination</label>
+                        <input type="text" class="form-control" id="destination" placeholder="Enter your destination" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" required>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Search Flights</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Search Results -->
+        <div class="search-results-container">
+            <h3 class="text-center result-title">Available Flights</h3>
+            <div id="searchResults" class="row g-4">
+                
+               <!-- cards appear here  -->
+            </div>
+        </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/navbar.js" defer></script>
     <script src="/js/search.js"></script>
 </body>

@@ -123,12 +123,12 @@ function handleBookingFormSubmit(token) {
     const name = document.getElementById("name")?.value.trim();
     const email = document.getElementById("email")?.value.trim();
     const seats = document.getElementById("seats")?.value.trim();
-    const cardNumber = document.getElementById("cardNumber")?.value.trim();
-    const expiryDate = document.getElementById("expiryDate")?.value.trim();
-    const cvv = document.getElementById("cvv")?.value.trim();
+    // const cardNumber = document.getElementById("cardNumber")?.value.trim();
+    // const expiryDate = document.getElementById("expiryDate")?.value.trim();
+    // const cvv = document.getElementById("cvv")?.value.trim();
 
     // Validate required fields
-    if (![flightId, name, email, seats, cardNumber, expiryDate, cvv].every(Boolean)) {
+    if (![flightId, name, email, seats].every(Boolean)) {
         alert("Please fill in all required fields.");
         return;
     }
@@ -138,9 +138,9 @@ function handleBookingFormSubmit(token) {
         name,
         email,
         seats,
-        cardNumber,
-        expiryDate,
-        cvv,
+        // cardNumber,
+        // expiryDate,
+        // cvv,
         date: new Date().toISOString(),
     };
 

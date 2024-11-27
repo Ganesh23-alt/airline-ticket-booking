@@ -18,6 +18,27 @@ router.get("/register", (req, res) => {
     res.sendFile(path.join(__dirname, "../views", "register.html"));
 });
 
+//serve profile page 
+router.get("/profile", (req, res) => {
+    res.sendFile(path.join(__dirname, "../views", "profile.html"));
+});
+
+
+//server cart page
+router.get("/cart", (req, res) => {
+    res.sendFile(path.join(__dirname, "../views", "cart.html"));
+});
+
+//serve payment page 
+router.get("/payment", (req, res) => {
+    res.sendFile(path.join(__dirname, "../views", "payment.html"));
+});
+
+//serve payment page 
+router.get("/thank-you", (req, res) => {
+    res.sendFile(path.join(__dirname, "../views", "thank-you.html"));
+});
+
 // Serve dashboard page
 router.get("/dashboard", (req, res) => {
     res.sendFile(path.join(__dirname, "../views", "dashboard.html"));

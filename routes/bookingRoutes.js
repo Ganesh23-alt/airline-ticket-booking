@@ -96,7 +96,7 @@ router.post("/confirmBooking", authenticateToken, (req, res) => {
     const lock = {};
     const { flightId, name, email, seats, cardNumber, expiryDate, cvv, date } = req.body;
 
-    if (!flightId || !name || !email || !seats || !cardNumber || !expiryDate || !cvv || !date) {
+    if (!flightId || !name || !email || !seats ) {
         return res.status(400).send("All fields are required.");
     }
 
