@@ -22,6 +22,7 @@
 /* Style for navbar */
 /* Horizontal layout for navbar items */
 .navbar-nav {
+  width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,7 +125,6 @@ body {
 }
 
 nav {
-  max-width: var(--max-width);
   margin: auto;
   padding: 1rem;
   display: flex;
@@ -161,6 +161,40 @@ nav {
   font-size: 3rem;
   line-height: 4rem;
 }
+
+/* In your styles.css */
+.header__container {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+}
+
+.header__container img {
+  width: 100%;
+  animation: slideIn 2s ease-in-out forwards;
+  transform: translateY(100%);
+}
+
+.section__header {
+  font-size: 2.5rem;
+  animation: fadeInUp 1.5s ease-out forwards;
+  transform: translateY(50%);
+  opacity: 0;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 
 .booking__container {
   border-radius: 2rem;
@@ -259,6 +293,30 @@ nav {
   padding: 1rem;
   font-size: 1.5rem;
 }
+
+.flight-card {
+    width: 100%; /* Full width on smaller devices */
+    max-width: 18rem; /* Restrict max width */
+    margin-bottom: 15px; /* Add spacing between cards */
+}
+
+.card-img-top {
+    height: 150px;
+    object-fit: cover; /* Prevent image distortion */
+}
+
+@media (max-width: 576px) {
+    .flight-card {
+        width: 90%; /* Slightly smaller on very small screens */
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        height: 2rem; /* Smaller icons for mobile */
+        width: 2rem;
+    }
+}
+
 
 .plan__container .subheader {
   margin-bottom: 1rem;
@@ -691,62 +749,27 @@ nav {
   }
 }
 
-
-/* current design  */
-
-/* h1 {
-    text-align: center;
+/* modal design  */
+/* Style the modal */
+.modal {
+    display: none;  /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 50%; /* Full width */
+    height: 50%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/opacity */
 }
 
-form {
-    margin: 20px auto;
-    max-width: 400px;
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60% !important; 
 }
-
-input, button {
-    display: block;
-    margin: 10px 0;
-    padding: 10px;
-    width: 100%;
-}
-
-.error {
-    color: red;
-}
-
-.hero {
-    background: url('../assets/images/flight1.jpg') no-repeat center center/cover;
-    color: white;
-} */
-
-
-/* Animation for cards */
-/* .card {
-    transition: transform 0.3s ease-in-out;
-}
-.card:hover {
-    transform: scale(1.05);
-} */
-
-/* Style for the booking form */
-/* #bookingForm {
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-} */
-
-/* Notification Modal */
-/* .modal-content {
-    animation: fadeInUp 0.5s;
-}
-
-@keyframes fadeInUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-} */
 
 

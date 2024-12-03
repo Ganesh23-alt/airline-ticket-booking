@@ -18,7 +18,14 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
         return response.json(); // Parse JSON response if status is OK
     })
     .then(data => {
-        alert(data.message);
+        Toastify({
+  text: data.message,
+  duration: 3000,
+  close: true, 
+  gravity: "top", 
+  position: "right", 
+  backgroundColor: "#4CAF50",
+}).showToast();;
         if (data.token) {
             localStorage.setItem('token', data.token); // Store token in local storage
             localStorage.setItem('userEmail', data.email); // Store user email
@@ -28,6 +35,13 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
     })
     .catch(err => {
         console.error('Error:', err);
-        alert('Login failed: ' + err); // Alert failure message
+        Toastify({
+  text: "Login Failed",
+  duration: 3000,
+  close: true, 
+  gravity: "top", 
+  position: "right", 
+  backgroundColor: "#4CAF50",
+}).showToast();
     });
 });

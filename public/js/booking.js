@@ -48,7 +48,16 @@ function decodeToken(token) {
 
 // Redirect to login page
 function redirectToLogin() {
-    alert("You must be logged in to book a flight.");
+    // Example of a basic Toastify notification
+Toastify({
+  text: "You must be logged in to book a flight",
+  duration: 3000,
+  close: true, 
+  gravity: "top", 
+  position: "right", 
+  backgroundColor: "#4CAF50",
+}).showToast();
+
     window.location.href = '/login.html';
 }
 
@@ -113,7 +122,14 @@ function displayFlightDetails(flight) {
 // Handle error redirect
 function handleErrorRedirect(message) {
     console.error(message);
-    alert(message);
+    Toastify({
+  text: message,
+  duration: 3000,
+  close: true, 
+  gravity: "top", 
+  position: "right", 
+  backgroundColor: "#4CAF50",
+}).showToast();
     window.location.href = '/flights.html';
 }
 
@@ -129,7 +145,14 @@ function handleBookingFormSubmit(token) {
 
     // Validate required fields
     if (![flightId, name, email, seats].every(Boolean)) {
-        alert("Please fill in all required fields.");
+        Toastify({
+  text: "Please fill in all the records",
+  duration: 3000,
+  close: true, 
+  gravity: "top", 
+  position: "right", 
+  backgroundColor: "#4CAF50",
+}).showToast();;
         return;
     }
 
@@ -179,7 +202,7 @@ function submitBooking(booking) {
     const token = localStorage.getItem('token'); // Retrieve token from localStorage
 
     if (!token) {
-        alert("You must be logged in to book a flight.");
+        // alert("You must be logged in to book a flight.");
         redirectToLogin();
         return;
     }
@@ -201,24 +224,24 @@ function submitBooking(booking) {
             return response.json();
         })
         .then((data) => {
-            alert(data.message);
+            // alert(data.message);
             window.location.href = `/receipt.html?bookingId=${data.booking.id}`; // Redirect with booking ID
         })
         .catch((err) => {
             console.error("Error:", err);
 
             if (err.message.includes("Invalid or expired token")) {
-                alert("Your session has expired. Please log in again.");
+                // alert("Your session has expired. Please log in again.");
                 redirectToLogin(); // Redirect to login on token failure
             } else {
-                alert(`Booking failed: ${err.message}`);
+                // alert(`Booking failed: ${err.message}`);
             }
         });
 }
 
 // Redirect to login page
 function redirectToLogin() {
-    alert("You must be logged in to book a flight")
+    // alert("You must be logged in to book a flight")
     window.location.href = '/login.html';
 }
 

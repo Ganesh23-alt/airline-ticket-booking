@@ -16,7 +16,7 @@ document.getElementById("registerForm").addEventListener("submit", function (e) 
     })
     .then(response => response.json())
     .then(data => {
-        alert(data.message);
+        // alert(data.message);
         if (data.message === "User registered successfully.") {
             window.location.href = '/login.html';
         }

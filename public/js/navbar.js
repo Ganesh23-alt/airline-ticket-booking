@@ -71,10 +71,11 @@ function logout() {
   try {
     // Clear user email from localStorage
     localStorage.removeItem("userEmail");
-    alert("You have been logged out successfully!");
+    window.location.href = '/';
+    // alert("You have been logged out successfully!");
     updateNavbar(); // Refresh navbar after logout
   } catch (error) {
     console.error("Error during logout:", error);
-    alert("Logout failed. Please try again.");
+    // alert("Logout failed. Please try again.");
   }
 }

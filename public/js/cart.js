@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const clearCartButton = document.getElementById("clearCartButton");
     const checkoutButton = document.getElementById("proceedToCheckoutButton");
 
+    const confirmationModal = document.getElementById("confirmationModal");
+    const confirmCheckoutButton = document.getElementById("confirmCheckout");
+    const cancelCheckoutButton = document.getElementById("cancelCheckout");
+
     // Load cart items from localStorage
     function loadCartItems() {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -40,21 +44,29 @@ document.addEventListener("DOMContentLoaded", function () {
         loadCartItems();  // Re-render cart items
     });
 
-    // Proceed to checkout
-    proceedToCheckoutButton.addEventListener("click", () => {
+    // Proceed to checkout with custom modal
+    checkoutButton.addEventListener("click", () => {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) {
-      alert("Your cart is empty. Add items to proceed.");
-    } else {
-      // Store cart data in sessionStorage for the payment page
-      sessionStorage.setItem("cart", JSON.stringify(cart));
-
-      // Redirect to the payment page
-      window.location.href = "/payment"; // Assuming the payment page is '/payment'
-    }
-  });
-
-  // Initial Load of Cart Items
-  loadCartItems();
+        if (cart.length === 0) {
+            alert("Your cart is empty. Add items to proceed.");
+        } else {
+            // Show confirmation modal
+            confirmationModal.style.display = "block";
+        }
     });
 
+    // Confirm checkout action
+    confirmCheckoutButton.addEventListener("click", () => {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        sessionStorage.setItem("cart", JSON.stringify(cart)); // Store cart data in sessionStorage
+        window.location.href = "/payment"; // Redirect to payment page
+    });
+
+    // Cancel checkout action
+    cancelCheckoutButton.addEventListener("click", () => {
+        confirmationModal.style.display = "none"; // Close the modal
+    });
+
+    // Initial Load of Cart Items
+    loadCartItems();
+});

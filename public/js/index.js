@@ -59,15 +59,14 @@ function displayFlights(flights) {
     const carouselInner = document.getElementById("carouselInner");
     let index = 0;
 
-    // Loop through the flights and create carousel items
     for (let i = 0; i < flights.length; i += 3) {
         const carouselItem = document.createElement("div");
         carouselItem.className = `carousel-item ${index === 0 ? "active" : ""}`;
-        
+
         const flightCards = flights.slice(i, i + 3).map(flight => `
-            <div class="col-4 d-flex justify-content-center">
-                <div class="card flight-card" style="width: 18rem;">
-                    <img src="/assets/images/${flight.image}" class="card-img-top" alt="${flight.name}" style="height: 150px; object-fit: cover;">
+            <div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center">
+                <div class="card flight-card">
+                    <img src="/assets/images/${flight.image}" class="card-img-top" alt="${flight.name}">
                     <div class="card-body text-center">
                         <h5 class="card-title">${flight.name}</h5>
                         <p class="card-text">Airline: ${flight.airline}</p>
@@ -81,14 +80,12 @@ function displayFlights(flights) {
             </div>
         `).join("");
 
-        carouselItem.innerHTML = `
-            <div class="row justify-content-center">${flightCards}</div>
-        `;
-
+        carouselItem.innerHTML = `<div class="row justify-content-center">${flightCards}</div>`;
         carouselInner.appendChild(carouselItem);
         index++;
     }
 }
+
 
 function applyFilters() {
     const airline = document.getElementById("airlineFilter").value;
