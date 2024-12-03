@@ -75,6 +75,9 @@
 
 /* navbar style ends */
 
+/* main section design  */
+
+/* main ends here */
 /* carousel  */
 .carousel-control-prev-icon, 
 .carousel-control-next-icon {
@@ -156,13 +159,10 @@ nav {
   color: var(--text-dark);
 }
 
-.header__container .section__header {
-  text-align: center;
-  font-size: 3rem;
-  line-height: 4rem;
-}
 
-/* In your styles.css */
+
+/* Main Section */
+/* Main Section */
 .header__container {
   position: relative;
   text-align: center;
@@ -171,6 +171,8 @@ nav {
 
 .header__container img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   animation: slideIn 2s ease-in-out forwards;
   transform: translateY(100%);
 }
@@ -184,7 +186,7 @@ nav {
 
 @keyframes slideIn {
   to {
-    transform: translateY(0);
+    transform: translateY(0); /* Image slides into its original position */
   }
 }
 
@@ -195,11 +197,11 @@ nav {
   }
 }
 
-
 .booking__container {
   border-radius: 2rem;
   border: 1px solid var(--extra-light);
   box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
 }
 
 .booking__nav {
@@ -227,7 +229,7 @@ nav {
 }
 
 .booking__container form {
-  margin-top: 4rem;
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr) auto;
   gap: 1rem;
@@ -293,6 +295,64 @@ nav {
   padding: 1rem;
   font-size: 1.5rem;
 }
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .section__header {
+    font-size: 2rem;
+  }
+
+  .header__container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    animation: slideInUp 2s ease-in-out forwards; /* Disable fade-in for small screens */
+    transform: translateY(0); /* Remove the Y-axis translation from 100% */
+  }
+
+  .booking__nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .booking__nav span {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+
+  .booking__container form {
+    grid-template-columns: 1fr; 
+    gap: 1.5rem;
+  }
+
+  .booking__container input {
+    font-size: 0.9rem;
+    padding: 8px 0;
+  }
+
+  .booking__container label {
+    font-size: 1rem;
+  }
+
+  .booking__container .btn {
+    font-size: 1.2rem;
+    padding: 0.75rem;
+  }
+}
+
+/* New animation for small screens */
+@keyframes slideInUp {
+  from {
+    transform: translateY(50%); /* Starts a bit off-screen */
+  }
+
+  to {
+    transform: translateY(0); /* Move into the screen */
+  }
+}
+
+
+/* main section ends  */
 
 .flight-card {
     width: 100%; /* Full width on smaller devices */
@@ -671,8 +731,8 @@ nav {
   }
 
   .header__container img {
-    min-width: 900px;
-    margin-left: 50%;
+    max-width: 900px;
+    margin-left: 0%;
     transform: translateX(-50%);
   }
 

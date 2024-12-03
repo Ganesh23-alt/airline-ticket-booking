@@ -89,12 +89,12 @@ window.addEventListener('DOMContentLoaded', function () {
                                 doc.save("booking_receipt.pdf");
                                 window.location.href = '/dashboard.html';
                             } else {
-                                alert("Flight details not found. Cannot download receipt.");
+                                // alert("Flight details not found. Cannot download receipt.");
                             }
                         })
                         .catch(err => console.error("Error loading flight data:", err));
                 } else {
-                    alert("Booking not found. Cannot download receipt.");
+                    // alert("Booking not found. Cannot download receipt.");
                 }
             })
             .catch(err => console.error("Error loading booking data:", err));

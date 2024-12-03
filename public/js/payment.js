@@ -61,13 +61,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const userAddress = userAddressInput.value.trim();
 
     if (!userName || !userEmail || !userAddress) {
-      alert("Please fill in all user details.");
+      // alert("Please fill in all user details.");
       return;
     }
 
     const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
     if (!selectedPaymentMethod) {
-      alert("Please select a payment method.");
+      // alert("Please select a payment method.");
       return;
     }
 

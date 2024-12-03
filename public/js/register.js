@@ -16,9 +16,17 @@ document.getElementById("registerForm").addEventListener("submit", function (e) 
     })
     .then(response => response.json())
     .then(data => {
+        Toastify({
+  text: data.message,
+  duration: 3000,
+  close: true, 
+  gravity: "top", 
+  position: "right", 
+  backgroundColor: "#4CAF50",
+}).showToast();
         // alert(data.message);
         if (data.message === "User registered successfully.") {
-            window.location.href = '/login.html';
+            window.location.href = '/login';
         }
     })
     .catch(err => console.log('Error:', err));

@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('userEmail', email); // Store email in local storage
                 window.location.href = '/'; 
             } else {
-                alert('Login failed: ' + data.message);
+                // alert('Login failed: ' + data.message);
             }
         });
     }
@@ -50,7 +50,7 @@ async function handleCredentialResponse(response) {
         localStorage.setItem('token', data.token); // Save token in localStorage
         window.location.href = '/'; // Redirect to homepage or dashboard
     } else {
-        alert('Google login failed: ' + data.message);
+        // alert('Google login failed: ' + data.message);
     }
 }
 

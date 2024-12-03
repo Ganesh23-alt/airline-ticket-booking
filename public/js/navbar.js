@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Load the navbar HTML file and insert it into the placeholder
-  fetch("/navbar.html")
+  fetch("/navbar")
     .then((response) => {
       if (!response.ok) {
         throw new Error("Failed to load navbar HTML.");

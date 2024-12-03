@@ -41,5 +41,19 @@
     "password": "$2a$10$NifXVm8/mEWYg8ADo9VCzuUfcjfJe0mieAIgPMT41AhdMTBuSOI2S",
     "phone": "6472854644",
     "countryCode": "Canada"
+  },
+  {
+    "name": "Ganesh Ranabhat",
+    "email": "ganeshranabhat@gmail.com",
+    "password": "$2a$10$M7dqZW0FN2S.M6MdePUQ8e460hG2DZ0FXiM7aTP0YUuWqPfTcGAwW",
+    "phone": "6472854643",
+    "countryCode": "Canada"
+  },
+  {
+    "name": "Garima Shrestha ",
+    "email": "garima12@gmail.com",
+    "password": "$2a$10$7JInoj3h.dpsevUNswPPBe372goRv/aoc/fetzsp4//k9Id4bqKbi",
+    "phone": "6472854643",
+    "countryCode": "Canada"
   }
 ]

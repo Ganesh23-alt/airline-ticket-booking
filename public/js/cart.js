@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
     checkoutButton.addEventListener("click", () => {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
         if (cart.length === 0) {
-            alert("Your cart is empty. Add items to proceed.");
+            // alert("Your cart is empty. Add items to proceed.");
         } else {
             // Show confirmation modal
             confirmationModal.style.display = "block";

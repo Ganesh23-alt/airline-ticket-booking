@@ -77,7 +77,7 @@ router.get("/bookings", (req, res) => {
 });
 
 // Serve navbar HTML (static)
-router.get("/navbar.html", (req, res) => {
+router.get("/navbar", (req, res) => {
   res.sendFile(path.join(__dirname, "../views", "navbar.html"));
 });
 
