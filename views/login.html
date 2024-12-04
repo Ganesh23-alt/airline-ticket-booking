@@ -18,9 +18,18 @@
 
     <style>
         body {
-            /* background: linear-gradient(to right, #6a11cb, #2575fc); */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #fff;
+        }
+        .background {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: url("/assets/images/image.png");
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px);
+            z-index: -1;
         }
         .login-container {
             max-width: 400px;
@@ -37,11 +46,12 @@
             color: #333;
         }
         .btn-primary {
-            background-color: #6a11cb;
+            background-color: #F8C146 !important;
             border: none;
+            color: black !important;
         }
         .btn-primary:hover {
-            background-color: #2575fc;
+            background-color: #f6d284;
         }
         .form-control {
             border-radius: 10px;
@@ -72,28 +82,31 @@
             margin-top: 20px;
         }
         .login-footer a {
-            color: #6a11cb;
+            color: black;
             text-decoration: none;
+            font-weight: 600;
         }
         .login-footer a:hover {
             text-decoration: underline;
+            color: #F8C146;
         }
     </style>
 </head>
 <body>
     <div id="navbar-placeholder"></div>
-    <section class="main-section">
+    <!-- <section class="main-section">
     <div class="animation-container">
       <div class="cloud cloud1"></div>
       <div class="cloud cloud2"></div>
       <div class="cloud cloud3"></div>
-      <img src="plane.png" alt="Plane" class="plane">
+      <img src="/assets/images/header.jpg" alt="Plane" class="plane">
     </div>
     <div class="text-content">
       <h1>Fly Anywhere, Anytime!</h1>
       <p>Explore destinations, book tickets, and take off for your next adventure.</p>
     </div>
-  </section>
+  </section> -->
+    <biv class="background"></biv>
     <div class="container">
         <div class="login-container">
             <h2>Welcome Back!</h2>
@@ -112,12 +125,12 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Login</button>
             </form>
-            <div class="social-login">
+            <!-- <div class="social-login">
                 <p>Or login with</p>
                 <a href="#" class="ri-google-line" title="Login with Google"></a>
                 <a href="#" class="ri-facebook-line" title="Login with Facebook"></a>
                 <a href="#" class="ri-twitter-line" title="Login with Twitter"></a>
-            </div>
+            </div> -->
             <div class="login-footer">
                 <p>Don't have an account? <a href="/register.html">Register Here</a></p>
             </div>

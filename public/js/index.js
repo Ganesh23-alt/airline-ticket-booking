@@ -164,3 +164,26 @@ function selectFlight(flightId) {
     const url = `/booking.html?flightId=${flightId}`;
     window.location.href = url;
 }
+
+// main section 
+// JavaScript for Carousel Effect
+document.addEventListener('DOMContentLoaded', () => {
+    // Select all circle-image divs
+    const imageContainers = document.querySelectorAll('.circle-image');
+
+    imageContainers.forEach(container => {
+        const images = container.querySelectorAll('.carousel-image');
+        let currentIndex = 0;
+
+        function changeImage() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        }
+
+        // Set interval for each container's images
+        setInterval(changeImage, 2000);
+    });
+});
+
+

@@ -22,6 +22,16 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #fff;
         }
+        .background {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-image: url("/assets/images/image.png");
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px);
+            z-index: -1;
+        }
         .register-container {
             max-width: 500px;
             margin: 50px auto;
@@ -37,11 +47,12 @@
             color: #333;
         }
         .btn-primary {
-            background-color: #1d2671;
+            background-color: #F8C146 !important;
             border: none;
+            color: black !important;
         }
         .btn-primary:hover {
-            background-color: #c33764;
+            background-color: #f6d284 !important;
         }
         .form-control {
             border-radius: 10px;
@@ -60,16 +71,19 @@
             margin-top: 20px;
         }
         .register-footer a {
-            color: #1d2671;
+            color: black;
             text-decoration: none;
+            font-weight: 600;
         }
         .register-footer a:hover {
             text-decoration: underline;
+            color: #F8C146;
         }
     </style>
 </head>
 <body>
     <div id="navbar-placeholder"></div>
+    <div class="background"></div>
     <div class="container">
         <div class="register-container">
             <h2>Create Your Account</h2>
