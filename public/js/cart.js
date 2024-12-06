@@ -16,10 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
             cartItemsList.innerHTML = `<tr><td colspan="3" class="text-center">Your cart is empty.</td></tr>`;
         } else {
             cart.forEach(item => {
+                console.log(item);
                 const row = document.createElement("tr");
                 row.innerHTML = `
                     <td>${item.flightName}</td>
+                    <td>${item.flightDestination}</td>
+                    <td>${item.flightDeparture}</td>
+                    <td>${item.flightArrival}</td>
                     <td>${item.flightClass}</td>
+                    <td>${item.price}</td>
                     <td><button class="btn btn-danger btn-sm removeItem" data-flight-id="${item.flightId}">Remove</button></td>
                 `;
                 cartItemsList.appendChild(row);

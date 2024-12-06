@@ -232,5 +232,13 @@
     "email": "ganesh23@gmail.com",
     "seats": 2,
     "date": "2024-12-01T17:55:48.539Z"
+  },
+  {
+    "id": "1733423095319",
+    "flightId": "6",
+    "name": "Ganesh Ranabhat",
+    "email": "ganesh23@gmail.com",
+    "seats": 2,
+    "date": "2024-12-05T18:24:55.300Z"
   }
 ]

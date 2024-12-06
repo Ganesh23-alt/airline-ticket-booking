@@ -25,14 +25,19 @@ document.addEventListener("DOMContentLoaded", function () {
     checkoutCartItemsList.innerHTML = "";
 
     cart.forEach(item => {
+      console.log(item)
       const flightName = item.flightName || "Unknown Flight";
+      const flightDeparture = item.flightDeparture || "Unknown Class";
+      const flightArrival = item.flightArrival || "Unknown Class";
+      const flightDestination = item.seats || "Unknown Class";
+      const seats = item.flightClass || "Unknown Class";
       const flightClass = item.flightClass || "Unknown Class";
       const price = parseFloat(item.price);
       const validPrice = isNaN(price) ? 0 : price; // Fallback to 0 if price is invalid
 
       const listItem = document.createElement("li");
       listItem.classList.add("list-group-item");
-      listItem.textContent = `${flightName} (${flightClass}) - $${validPrice.toFixed(2)}`;
+      listItem.textContent = `${flightName} ${flightDeparture} ${flightArrival} ${flightDestination} ${seats} (${flightClass}) - $${validPrice.toFixed(2)}`;
       checkoutCartItemsList.appendChild(listItem);
 
       totalAmount += validPrice;

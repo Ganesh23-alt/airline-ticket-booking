@@ -33,6 +33,7 @@ app.use("/api", authRoutes);
 app.use("/api", bookingRoutes);
 
 
+
 // Serve static files from 'public' and 'views' folders
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "views")));

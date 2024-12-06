@@ -13,6 +13,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
     fetchFlights();
 
+    // fetch est deals 
+    fetchBestDeals();
+
     // Add event listeners to the elements after DOM is ready
     const airlineFilter = document.getElementById("airlineFilter");
     const priceSort = document.getElementById("priceSort");
@@ -165,6 +168,61 @@ function selectFlight(flightId) {
     window.location.href = url;
 }
 
+//best deals 
+
+function fetchBestDeals() {
+    fetch('/data/bestdeals.json') // Fetching data from bestdeals.json
+        .then(response => response.json())
+        .then(displayBestDeals)
+        .catch(err => console.error("Error loading best deals:", err));
+} 
+
+function displayBestDeals(bestDeals) {
+    const bestDealsList = document.getElementById("bestDealsList");
+    bestDealsList.innerHTML = `
+        <div id="bestDealsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="bestDealsCarouselInner"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#bestDealsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#bestDealsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    `;
+
+    const carouselInner = document.getElementById("bestDealsCarouselInner");
+    let index = 0;
+
+    for (let i = 0; i < bestDeals.length; i += 3) {
+        const carouselItem = document.createElement("div");
+        carouselItem.className = `carousel-item ${index === 0 ? "active" : ""}`;
+
+        const dealCards = bestDeals.slice(i, i + 3).map(deal => `
+            <div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center">
+                <div class="card best-deal-card">
+                    <img src="/assets/images/${deal.image}" class="card-img-top" alt="${deal.name}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">${deal.name}</h5>
+                        <p class="card-text">Airline: ${deal.airline}</p>
+                        <p class="card-text text-primary">Destination: ${deal.destination}</p>
+                        <p class="card-text text-primary">Departure Date: ${deal.departure}</p>
+                        <p class="card-text text-primary">Price: $${deal["new price"]} <span class="text-muted"><del>$${deal.price}</del></span></p>
+                        <p class="card-text text-primary">Seats Available: ${deal.availableSeats}</p>
+                        <button onclick="selectFlight(${deal.id})" class="btn btn-primary">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        `).join("");
+
+        carouselItem.innerHTML = `<div class="row justify-content-center">${dealCards}</div>`;
+        carouselInner.appendChild(carouselItem);
+        index++;
+    }
+}
+
 // main section 
 // JavaScript for Carousel Effect
 document.addEventListener('DOMContentLoaded', () => {
@@ -182,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Set interval for each container's images
-        setInterval(changeImage, 2000);
+        setInterval(changeImage, 1500);
     });
 });
 

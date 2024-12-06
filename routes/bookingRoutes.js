@@ -155,4 +155,55 @@ router.post("/confirmBooking", authenticateToken, (req, res) => {
 });
 
 
+//delete booking 
+router.post("/checkout", authenticateToken, (req, res) => {
+    const { bookingId } = req.body;  // Get the booking ID from the request body
+
+    if (!bookingId) {
+        return res.status(400).send("Booking ID is required.");
+    }
+
+    try {
+        // Read the current bookings and flights data
+        const bookings = readJsonFile(bookingsFile);
+        const flights = readJsonFile(flightsFile);
+
+        // Find the booking by ID
+        const bookingIndex = bookings.findIndex((b) => b.id === bookingId);
+        if (bookingIndex === -1) {
+            throw new Error("Booking not found.");
+        }
+
+        // Get the flight associated with this booking
+        const booking = bookings[bookingIndex];
+        const flight = flights.find((f) => f.id == booking.flightId);
+
+        if (!flight) {
+            throw new Error("Flight not found.");
+        }
+
+        // Update available seats for the flight
+        const availableSeats = parseInt(flight.availableSeats, 10);
+        flight.availableSeats = availableSeats + booking.seats;  // Add back the seats that were booked
+
+        // Remove the booking from the bookings array
+        bookings.splice(bookingIndex, 1);
+
+        // Write the updated bookings and flights data back to the files
+        writeJsonFile(bookingsFile, bookings);
+        writeJsonFile(flightsFile, flights);
+
+        // Respond with success
+        res.status(200).send({
+            message: "Checkout successful. Booking has been removed.",
+            updatedFlight: flight,
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+});
+
+
+
 module.exports = router;

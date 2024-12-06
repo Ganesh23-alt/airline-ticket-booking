@@ -33,12 +33,20 @@ document.addEventListener("DOMContentLoaded", function () {
   let flightDetailsHTML = "";
   cartItems.forEach(item => {
     const flightName = item.flightName || "Unknown Flight";
-    const flightClass = item.flightClass || "Unknown Class";
-    const price = parseFloat(item.price) || 0;
+      const flightDeparture = item.flightDeparture || "Unknown Class";
+      const flightArrival = item.flightArrival || "Unknown Class";
+      const flightDestination = item.seats || "Unknown Class";
+      const seats = item.seats || "Unknown Class";
+      const flightClass = item.flightClass || "Unknown Class";
+      const price = parseFloat(item.price);
     totalPrice += price;
 
     flightDetailsHTML += `
       <p><strong>Flight Name:</strong> ${flightName}</p>
+      <p><strong>Flight Destination:</strong> ${flightDestination}</p>
+      <p><strong>Flight Departure Date:</strong> ${flightDeparture}</p>
+      <p><strong>Flight Arrival Date:</strong> ${flightArrival}</p>
+      <p><strong>No. of Seats Booked:</strong> ${seats}</p>
       <p><strong>Flight Class:</strong> ${flightClass}</p>
       <p><strong>Price:</strong> $${price.toFixed(2)}</p>
       <hr>

@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((users) => {
       const user = users.find((u) => u.email.toLowerCase() === userEmail.toLowerCase());
       if (user) {
-        userNameSpan.textContent = user.name;
+        userNameSpan.textContent = user.name || "N/A";
         userPhoneSpan.textContent = user.phone || "N/A";
         userAddressSpan.textContent = user.countryCode || "N/A";
       }
@@ -50,12 +50,23 @@ document.addEventListener("DOMContentLoaded", function () {
                   <td>${flight.name}</td>
                   <td>${flight.airline}</td>
                   <td>${flight.destination}</td>
-                  <td>${flight.departure}</td>
-                  <td>${flight.arrival}</td>
-                  <td>${flight.class}</td>
-                  <td>${booking.seats}</td>
+                  <td>${flight.departure || "N/A"}</td>
+                  <td>${flight.arrival || "N/A"}</td>
+                  <td>${flight.class || "N/A"}</td>
+                  <td>${booking.seats || "N/A"}</td>
                   <td>
-                    <button class="btn btn-warning btn-sm addToCart-btn" data-flight-id="${flight.id}" data-flight-name="${flight.name}" data-flight-class="${flight.class}" data-flight-price="${flight.price}">Add to Cart</button>
+                    <button class="btn btn-warning btn-sm addToCart-btn" 
+                            data-flight-id="${flight.id}" 
+                            data-flight-name="${flight.name}" 
+                            data-flight-airline="${flight.airline}" 
+                            data-flight-class="${flight.class}" 
+                            data-flight-price="${flight.price || 0}" 
+                            data-flight-departure="${flight.departure || 'N/A'}"
+                            data-flight-arrival="${flight.arrival || 'N/A'}"
+                            data-flight-destination="${flight.destination || 'N/A'}"
+                            data-flight-seats="${booking.seats || 0}">
+                      Add to Cart
+                    </button>
                     <button class="btn btn-danger btn-sm removeFlight-btn" data-flight-id="${flight.id}">Remove</button>
                   </td>
                 `;
@@ -77,10 +88,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const flightId = target.getAttribute("data-flight-id");
       const flightName = target.getAttribute("data-flight-name");
       const flightClass = target.getAttribute("data-flight-class");
-      const flightPrice = parseFloat(target.getAttribute("data-flight-price")); // Ensure price is a float
+      const flightPrice = parseFloat(target.getAttribute("data-flight-price")) || 0;
+      const flightDestination = target.getAttribute("data-flight-destination");
+      const flightDeparture = target.getAttribute("data-flight-departure");
+      const flightArrival = target.getAttribute("data-flight-arrival");
+      const seats = parseInt(target.getAttribute("data-flight-seats")) || 0;
 
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push({ flightId, flightName, flightClass, price: flightPrice });
+      cart.push({ flightId, flightName, flightClass, price: flightPrice, flightDeparture, flightArrival, flightDestination, seats });
       localStorage.setItem("cart", JSON.stringify(cart));
 
       updateCartCount();

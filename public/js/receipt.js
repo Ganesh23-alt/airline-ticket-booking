@@ -58,8 +58,8 @@ window.addEventListener('DOMContentLoaded', function () {
         
         // Add event listener for Proceed to Checkout
         document.getElementById("checkoutBtn").addEventListener('click', function () {
-            // Redirect to payment page with bookingId in the URL
-            window.location.href = `/payment.html?bookingId=${booking.id}`;
+            // Redirect to checkout page with bookingId in the URL
+            window.location.href = `/checkout.html?bookingId=${booking.id}`;
         });
     }
 
@@ -78,7 +78,7 @@ window.addEventListener('DOMContentLoaded', function () {
                                 const doc = new jsPDF();
                                 doc.text("Booking Receipt", 20, 20);
                                 doc.text("Booking ID: " + booking.id, 20, 30);
-                                doc.text("Flight ID: " + flight.name, 20, 40);
+                                doc.text("Flight Name: " + flight.name, 20, 40);
                                 doc.text("Airline: " + flight.airline, 20, 50);
                                 doc.text("Destination: " + flight.destination, 20, 60);
                                 doc.text("Departure: " + new Date(flight.departure).toLocaleString(), 20, 70);
@@ -89,14 +89,20 @@ window.addEventListener('DOMContentLoaded', function () {
                                 doc.save("booking_receipt.pdf");
                                 window.location.href = '/dashboard.html';
                             } else {
-                                // alert("Flight details not found. Cannot download receipt.");
+                                alert("Flight details not found. Cannot download receipt.");
                             }
                         })
-                        .catch(err => console.error("Error loading flight data:", err));
+                        .catch(err => {
+                            console.error("Error loading flight data:", err);
+                            alert("Error fetching flight details.");
+                        });
                 } else {
-                    // alert("Booking not found. Cannot download receipt.");
+                    alert("Booking not found. Cannot download receipt.");
                 }
             })
-            .catch(err => console.error("Error loading booking data:", err));
+            .catch(err => {
+                console.error("Error loading booking data:", err);
+                alert("Error fetching booking details.");
+            });
     });
 });
