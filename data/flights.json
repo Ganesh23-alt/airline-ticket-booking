@@ -10,7 +10,7 @@
     "directFlight": true,
     "class": "Economy",
     "stops": "Direct",
-    "availableSeats": 63,
+    "availableSeats": 55,
     "image": "emirates.jpg"
   },
   {
@@ -66,7 +66,7 @@
     "directFlight": false,
     "class": "Business",
     "stops": "1 Stop",
-    "availableSeats": 73,
+    "availableSeats": 69,
     "image": "vistara.jpg"
   },
   {

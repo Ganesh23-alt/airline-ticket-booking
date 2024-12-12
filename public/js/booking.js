@@ -107,8 +107,8 @@ function displayFlightDetails(flight) {
                     <h5 class="card-title">${flight.name}</h5>
                     <p><strong>Airline:</strong> ${flight.airline}</p>
                     <p><strong>Destination:</strong> ${flight.destination}</p>
-                    <p><strong>Departure:</strong> ${new Date(flight.departureDate).toLocaleString()}</p>
-                    <p><strong>Arrival:</strong> ${new Date(flight.arrivalDate).toLocaleString()}</p>
+                    <p><strong>Departure:</strong> ${new Date(flight.departure).toLocaleString()}</p>
+                    <p><strong>Arrival:</strong> ${new Date(flight.arrival).toLocaleString()}</p>
                     <p><strong>Price:</strong> $${flight.price}</p>
                     <p><strong>Class:</strong> ${flight.class}</p>
                     <p><strong>No of Stops:</strong> ${flight.stops}</p>
@@ -139,9 +139,6 @@ function handleBookingFormSubmit(token) {
     const name = document.getElementById("name")?.value.trim();
     const email = document.getElementById("email")?.value.trim();
     const seats = document.getElementById("seats")?.value.trim();
-    // const cardNumber = document.getElementById("cardNumber")?.value.trim();
-    // const expiryDate = document.getElementById("expiryDate")?.value.trim();
-    // const cvv = document.getElementById("cvv")?.value.trim();
 
     // Validate required fields
     if (![flightId, name, email, seats].every(Boolean)) {
@@ -161,42 +158,12 @@ function handleBookingFormSubmit(token) {
         name,
         email,
         seats,
-        // cardNumber,
-        // expiryDate,
-        // cvv,
         date: new Date().toISOString(),
     };
 
     submitBooking(booking, token);
 }
 
-// Submit booking to the server
-// function submitBooking(booking, token) {
-//     fetch('/api/confirmBooking', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': `Bearer ${token}`, // Include token for authentication
-//         },
-//         body: JSON.stringify(booking),
-//     })
-//         .then((response) => {
-//             if (!response.ok) {
-//                 return response.json().then((error) => {
-//                     throw new Error(error.message || "Booking failed.");
-//                 });
-//             }
-//             return response.json();
-//         })
-//         .then((data) => {
-//             alert(data.message);
-//             window.location.href = `/receipt.html?bookingId=${data.booking.id}`; // Redirect with booking ID
-//         })
-//         .catch((err) => {
-//             console.error("Error:", err);
-//             alert("Booking failed. Please try again.");
-//         });
-// }
 
 function submitBooking(booking) {
     const token = localStorage.getItem('token'); // Retrieve token from localStorage

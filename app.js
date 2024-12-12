@@ -12,16 +12,6 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const app = express();
 const port = process.env.PORT || 3001;
 
-// CSP handler 
-// app.use((req, res, next) => {
-//     res.setHeader(
-//         'Content-Security-Policy',
-//         "default-src 'self'; style-src 'self' https://stackpath.bootstrapcdn.com https://maxcdn.bootstrapcdn.com 'unsafe-inline'; script-src 'self' https://code.jquery.com https://maxcdn.bootstrapcdn.com 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https://via.placeholder.com;"
-//     );
-//     next();
-// });
-
-
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -39,9 +29,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "views")));
 app.use('/data', express.static(path.join(__dirname, 'data')));
 
-// app.get('/data/booking.json', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'data', 'booking.json'));
-// });
+app.get('/data/booking.json', (req, res) => {
+    res.sendFile(path.join(__dirname, 'data', 'booking.json'));
+});
 
 
 

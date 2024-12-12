@@ -24,7 +24,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   close: true, 
   gravity: "top", 
   position: "right", 
-  backgroundColor: "#4CAF50",
+  backgroundColor: "#D0312D",
 }).showToast();;
         if (data.token) {
             localStorage.setItem('token', data.token); // Store token in local storage
@@ -41,7 +41,7 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
   close: true, 
   gravity: "top", 
   position: "right", 
-  backgroundColor: "#4CAF50",
+  backgroundColor: "#D0312D",
 }).showToast();
     });
 });

@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Set interval for each container's images
-        setInterval(changeImage, 1500);
+        setInterval(changeImage, 1000);
     });
 });
 

@@ -59,7 +59,7 @@ window.addEventListener('DOMContentLoaded', function () {
         // Add event listener for Proceed to Checkout
         document.getElementById("checkoutBtn").addEventListener('click', function () {
             // Redirect to checkout page with bookingId in the URL
-            window.location.href = `/checkout.html?bookingId=${booking.id}`;
+            window.location.href = `/payment.html?bookingId=${booking.id}`;
         });
     }
 
