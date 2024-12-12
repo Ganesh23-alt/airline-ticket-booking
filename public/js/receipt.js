@@ -53,13 +53,14 @@ window.addEventListener('DOMContentLoaded', function () {
             <p><strong>Seats:</strong> ${booking.seats}</p>
             <p><strong>Booking Date:</strong> ${new Date(booking.date).toLocaleString()}</p>
             <p><strong>Price:</strong> $${flight.price}</p>
-            <button id="checkoutBtn" class="btn btn-success">Proceed to Checkout</button> <!-- Proceed to Checkout Button -->
+            <button id="checkoutBtn" class="btn btn-success">View Cart</button> <!-- Proceed to cart Button -->
         `;
         
         // Add event listener for Proceed to Checkout
         document.getElementById("checkoutBtn").addEventListener('click', function () {
             // Redirect to checkout page with bookingId in the URL
-            window.location.href = `/payment.html?bookingId=${booking.id}`;
+            // window.location.href = `/payment.html?bookingId=${booking.id}`;
+            window.location.href = '/profile';
         });
     }
 

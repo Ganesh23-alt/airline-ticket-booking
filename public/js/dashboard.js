@@ -60,8 +60,9 @@ function fetchFlights() {
 // Display flights
 function displayFlights(flights) {
     const flightsList = document.getElementById("flightsList");
-    flightsList.innerHTML = "";
-    flights.forEach(flight => {
+    flightsList.innerHTML = ` <h2>Available Flights</h2>`;
+    if(flights.length > 0){
+        flights.forEach(flight => {
         const flightElement = document.createElement("div");
         flightElement.className = "col-md-4 flight-card";
         flightElement.innerHTML = `
@@ -80,6 +81,14 @@ function displayFlights(flights) {
         `;
         flightsList.appendChild(flightElement);
     });
+    }
+    else{
+        flightsList.innerHTML = `
+        <h1> Sorry! Not Found </h1>
+        <div class="img-not-found">
+                <img src="/assets/images/notfound.jpg" class="not-found">
+            </div>`;
+    }
 }
 
 // Apply filters and sorting
@@ -127,6 +136,7 @@ function applyFilters() {
             if (sortOption) {
                 filteredFlights = sortFlights(filteredFlights, sortOption);
             }
+            
 
             displayFlights(filteredFlights);
         })

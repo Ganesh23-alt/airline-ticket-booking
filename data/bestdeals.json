@@ -15,21 +15,6 @@
     "image": "emirates.jpg"
   },
   {
-    "id": 2,
-    "airline": "Vistara",
-    "name": "DL203",
-    "destination": "Kathmandu",
-    "departure": "2024-12-18",
-    "arrival": "2024-12-18",
-    "price": 800,
-    "new price" : 600,
-    "directFlight": false,
-    "class": "Economy",
-    "stop":"2+ Stops",
-    "availableSeats": 59,
-    "image": "vistara.jpg"
-  },
-  {
     "id": 3,
     "airline": "Emirates",
     "name": "AC102",

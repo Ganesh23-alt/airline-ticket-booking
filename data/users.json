@@ -55,5 +55,26 @@
     "password": "$2a$10$7JInoj3h.dpsevUNswPPBe372goRv/aoc/fetzsp4//k9Id4bqKbi",
     "phone": "6472854643",
     "countryCode": "Canada"
+  },
+  {
+    "name": "Suson Sapkota ",
+    "email": "suson12369@gmail",
+    "password": "$2a$10$n5lgFNXrkLVYyxy93aAnqO6GLeHQb4qsN7.5q10j.Lt//gUJKJjBe",
+    "phone": "6873456756",
+    "countryCode": "1"
+  },
+  {
+    "name": "Ganesh Ranabhat",
+    "email": "ganeshranabhat233@gmail.com",
+    "password": "$2a$10$AF/m6Ksl82.IFhKY7N4ZSuqO0Wa1Ai7.BJEJcP3jT5gjtlCHvc6La",
+    "phone": "6472854642",
+    "countryCode": "Canada"
+  },
+  {
+    "name": "John Doe",
+    "email": "johndoe11@gmail.com",
+    "password": "$2a$10$4mBTUHeDbranIbKc87p9su6shBZEGLSNu6vf.RJBgBWh4ZK5X5Guu",
+    "phone": "905-993-2213",
+    "countryCode": "+1"
   }
 ]
